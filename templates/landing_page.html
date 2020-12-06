@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block site_content %}
+         <div class="jumbotron parent">
+            <img style="width: 100%" src="https://wallpapercave.com/wp/wp517616.jpg" alt="">
+            <div class="absolute">
+               <h1 class="display-4">Welcome to SportGoods</h1>
+               <p class="lead">Look for fight gear.</p>
+               <hr class="my-4">
+               <div class="inner cover">
+                  <h1 class="cover-heading"></h1>
+                  <div class="row">
+                     <div class="col-lg-6">
+                        <p class="lead">Already have an account? <br><a href="{% url "login user" %}" class="btn btn-lg btn-secondary">sign in</a></p>
+                     </div>
+                     <div class="col-lg-6">
+                        <p class="lead"> Do not have an account? <br>
+                           <a href="{% url 'register user' %}" class="btn btn-lg btn-secondary">sign up</a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+{% endblock %}
