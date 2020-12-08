@@ -139,3 +139,4 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 LOGIN_URL = '/auth/login/'
 
+LOGIN_REDIRECT_URL = '/'
