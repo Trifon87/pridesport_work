@@ -9,4 +9,3 @@ class UserProfile(models.Model):
         upload_to='profiles/'
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-

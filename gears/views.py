@@ -115,3 +115,6 @@ def create(request):
         return render(request, 'gear_list_try.html', context)
 
 
+def about(request):
+    return render(request, 'about_us.html')
+
