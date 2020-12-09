@@ -2,15 +2,25 @@
 {% block site_content %}
     <div class="container">
         <h1 class='text-center'>All gears</h1>
+     <form method="get" action="{% url 'gears' %}">
+        {{ filter_form }}
+        {% csrf_token %}
+        <button>Filter</button>
+    </form>
         <div class="row">
             {% for gear in gears %}
             <div class="col-lg-4">
                 <div class="card" style="width: 18rem;">
                     <img src="{{ gear.image_url.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{ gear.type }} {{ gear.name }}, Цена: {{ gear.price }}0лв</h5>
-                        <p class="card-text">{{ gear.description }}</p>
-                        <a class='btn btn-primary' href="{% url 'gear detail' gear.id %}"> Click </a>
+
+                            <h5 class="card-title">{{ gear.type }} {{ gear.name }}, Цена: {{ gear.price }}0лв</h5>
+                            <p class="card-text">{{ gear.description }}</p>
+                            <a class='btn btn-primary' href="{% url 'gear detail' gear.id %}"> Click </a>
+                        {% if gear.can_delete or user.is_superuser %}
+                            <a href='{% url 'edit' gear.pk %}' class="btn btn-success">Edit</a>
+                            <a href='{% url 'delete' gear.id %}' class="btn btn-danger">Delete</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

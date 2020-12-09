@@ -13,9 +13,10 @@
                 </div>
                 <p class="mt-2">Description: {{ gear.description }}</p>
                 <div>
+                    {% if gear.can_delete or user.is_superuser %}
                      <a href='{% url 'edit' gear.pk %}' class="btn btn-success">Edit</a>
                 <a href='{% url 'delete' gear.id %}' class="btn btn-danger">Delete</a>
-
+                    {% endif %}
                 </div>
 
                 <a href="{% url 'like gear' gear.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>

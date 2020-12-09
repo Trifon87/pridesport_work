@@ -23,7 +23,7 @@ class Gear(models.Model):
     image_url = models.ImageField(
         upload_to='gear',
     )
-    # created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     # likes = models.IntegerField(blank=True)
     def __str__(self):
         return f"{self.id} {self.name} {self.price}"

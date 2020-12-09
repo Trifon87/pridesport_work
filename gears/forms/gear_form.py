@@ -23,7 +23,8 @@ class GearForm(forms.ModelForm):
 
     class Meta:
         model = Gear
-        fields = '__all__'
+        fields = "__all__"
+        # exclude = ('created_by', )
         # widgets = {
         #     'image_url': forms.TextInput(
         #         attrs={
@@ -31,3 +32,18 @@ class GearForm(forms.ModelForm):
         #         }
         #     )
         # }
+class FilterForm(forms.Form):
+    ORDER_ASC = 'asc'
+    ORDER_DESC = 'desc'
+
+    ORDER_CHOICES = (
+        (ORDER_ASC, 'Ascending'),
+        (ORDER_DESC, 'Descending'),
+    )
+
+    text = forms.CharField(required=False,)
+    # price = forms.IntegerField(required=False,)
+    order = forms.ChoiceField(
+        choices=ORDER_CHOICES,
+        required=False,
+    )

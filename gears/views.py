@@ -4,22 +4,42 @@ from django.shortcuts import render, redirect
 from core.clean_up import clean_up_files
 from decorators.decorators import group_required
 from gears.forms.comment_form import CommentForm
-from gears.forms.gear_form import GearForm
+from gears.forms.gear_form import GearForm, FilterForm
 from gears.models import Gear, Like, Comment
 
 
 # Create your views here.
 
+def extract_filter_values(params):
+    order = params['order'] if 'order' in params else FilterForm.ORDER_ASC
+    text = params['text'] if 'text' in params else ''
+    price = params['price'] if 'price' in params else FilterForm.ORDER_ASC
+
+    return {
+        'order': order,
+        'text': text,
+        'price': price,
+    }
 
 def gear_list(request):
+    params = extract_filter_values(request.GET)
+    order_by = 'price' if params['order'] == FilterForm.ORDER_ASC else '-price'
+    # order_by = 'text' if params['order'] == FilterForm.ORDER_ASC else '-text'
+    gears = Gear.objects.filter(name__icontains=params['text']).order_by(order_by)
+
+    for gear in gears:
+        gear.can_delete = gear.created_by_id == request.user.id
     context = {
-        'gears': Gear.objects.all(),
+        'gears': gears,
+        'filter_form': FilterForm(initial=params),
     }
     return render(request, 'gear_list_try.html', context)
 
 
 def gear_details(request, pk):
+
     gear = Gear.objects.get(pk=pk)
+    gear.can_delete = gear.created_by_id == request.user.id
     if request.method == "GET":
 
         context = {
@@ -109,6 +129,7 @@ def create(request):
     else:
         form = GearForm(request.POST,request.FILES)
         if form.is_valid():
+
             gear = form.save()
             return redirect('gear detail', gear.pk)
         context = {
