@@ -32,16 +32,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'pridesport_work.sportgoods',
+    'pridesport_work.gears',
+    'pridesport_work.pridesport_auth',
+    'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sportgoods',
-    'gears',
-    'pridesport_auth',
-    'bootstrap4',
+
+
 
 ]
 

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from pridesport_auth.models import UserProfile
+from pridesport_work.pridesport_auth.models import UserProfile
 
 
 class LoginForm(forms.Form):

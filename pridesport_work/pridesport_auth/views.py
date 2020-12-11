@@ -4,7 +4,7 @@ from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
-from pridesport_auth.forms.forms import RegisterForm, ProfileForm, LoginForm
+from pridesport_work.pridesport_auth.forms.forms import RegisterForm, ProfileForm, LoginForm
 
 
 # @transaction.atomic
@@ -122,7 +122,7 @@ def login_user(request):
 
             if user:
                 login(request, user)
-                return redirect(return_url)
+                return render(request, 'auth/user_profile.html')
 
         context = {
             'login_form': login_form,
@@ -135,3 +135,6 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('landing page')
+
+def user_profile(request, pk=None):
+    pass

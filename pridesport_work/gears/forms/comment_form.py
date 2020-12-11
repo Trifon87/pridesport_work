@@ -1,6 +1,6 @@
 from django import forms
 
-from gears.models import Comment
+from pridesport_work.gears.models import Comment
 
 
 # class CommentForm(forms.ModelForm):

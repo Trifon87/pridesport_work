@@ -1,11 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from core.clean_up import clean_up_files
-from decorators.decorators import group_required
-from gears.forms.comment_form import CommentForm
-from gears.forms.gear_form import GearForm, FilterForm
-from gears.models import Gear, Like, Comment
+from pridesport_work.core.clean_up import clean_up_files
+from pridesport_work.decorators.decorators import group_required
+from pridesport_work.gears.forms.comment_form import CommentForm
+from pridesport_work.gears.forms.gear_form import GearForm, FilterForm
+from pridesport_work.gears.models import Gear, Like, Comment
 
 
 # Create your views here.

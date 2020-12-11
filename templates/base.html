@@ -35,6 +35,7 @@
     </div>
     <div class>
         {% if user.is_authenticated %}
+{#            Hello, {{ user.username }}! <a class="nav-link" href="{% url 'user profile' user.id %}">Logout</a>#}
             Hello, {{ user.username }}! <a class="nav-link" href="{% url 'logout user' %}">Logout</a>
 
         {% else %}

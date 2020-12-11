@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class GearsConfig(AppConfig):
-    name = 'gears'
+    name = 'pridesport_work.gears'

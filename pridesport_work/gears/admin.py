@@ -1,9 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from gears.models import Gear, Like
+from pridesport_work.gears.models import Gear, Like
 
-from gears.models import Comment
+from pridesport_work.gears.models import Comment
 
 
 class LikeInLine(admin.TabularInline):

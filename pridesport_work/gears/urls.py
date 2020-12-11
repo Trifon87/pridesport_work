@@ -1,6 +1,6 @@
 from django.urls import path
 
-from gears.views import gear_list, gear_details, gear_like, edit, delete, create, about
+from pridesport_work.gears.views import gear_list, gear_details, gear_like, edit, delete, create, about
 
 urlpatterns = [
     path('', gear_list, name='gears'),

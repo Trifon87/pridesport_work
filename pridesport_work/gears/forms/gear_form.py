@@ -1,6 +1,6 @@
 from django import forms
 
-from gears.models import Gear
+from pridesport_work.gears.models import Gear
 
 
 # class GearForm(forms.ModelForm):
