@@ -40,6 +40,7 @@ def gear_details(request, pk):
 
     gear = Gear.objects.get(pk=pk)
     gear.can_delete = gear.created_by_id == request.user.id
+    gear.can_edit = gear.created_by_id == request.user.id
     if request.method == "GET":
 
         context = {
@@ -65,12 +66,7 @@ def gear_details(request, pk):
         return render(request, 'gear_detail_try.html', context)
 
 
-# def gear_like(request, pk):
-#     gear = Gear.objects.get(pk=pk)
-#     # like = Like(test=str(pk))
-#
-#     like.save()
-#     return redirect('gear detail', pk)
+
 @login_required
 def gear_like(request, pk):
     gear = Gear.objects.get(pk=pk)
@@ -79,9 +75,7 @@ def gear_like(request, pk):
     like.save()
     return redirect('gear detail', pk)
 
-
-
-@login_required
+@group_required(['Staff'])
 def edit(request, pk):
     gear = Gear.objects.get(pk=pk)
     if request.method == "GET":
@@ -103,7 +97,7 @@ def edit(request, pk):
         }
         return render(request, 'gear_edit.html', context)
 
-@login_required
+@group_required(['Staff'])
 def delete(request, pk):
     gear = Gear.objects.get(pk=pk)
     if request.method == "GET":
@@ -116,8 +110,7 @@ def delete(request, pk):
         return redirect('gears')
 
 
-# @group_required(['Regular User'])
-@login_required
+@group_required(['Staff'])
 def create(request):
 
     if request.method == "GET":

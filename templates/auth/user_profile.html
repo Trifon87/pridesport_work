@@ -2,9 +2,9 @@
 {% block site_content %}
     {% load bootstrap4 %}
     <div class="text-center">
-        <h1>Hello, {{ profile_user.username }}!</h1>
+        <h1>Hello, {{ user.username }}!</h1>
         <h5>This is your profile</h5>
-        <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}" alt="Generic placeholder image"
+        <img class="rounded-circle mb-3" src="{{ user.userprofile.profile_image.url }}"
              width="140"
              height="140">
 
@@ -16,34 +16,11 @@
         </div>
     </div>
     <hr>
-    {% if gears %}
-        <h2 class='text-center'>These are you gear photos</h2>
-        <div class="row">
-        <div class="row">
-        {% for gear in gears %}
-            <div class="col-lg-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{ gear.image_url.url }}" class="card-img-top" alt="...">
-                    <div class="card-body">
 
-                        <h5 class="card-title">{{ gear.type }} {{ gear.name }}, Цена: {{ gear.price }}0лв</h5>
-                        <p class="card-text">{{ gear.description }}</p>
-                        <a class='btn btn-primary' href="{% url 'gear detail' gear.id %}"> Click </a>
-                        <p class="card-text"><strong>Owner: pet_user</strong></p>
-                        {% if gear.can_delete or user.is_superuser %}
-                            <a href='{% url 'edit' gear.pk %}' class="btn btn-success">Edit</a>
-                            <a href='{% url 'delete' gear.id %}' class="btn btn-danger">Delete</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    {% endif %}
-</div>
-</div>
-    else
     <div class="text-center">
-        <h2>You have no pets</h2>
+    {% for gear in user.gears %}
+        {{ gear }}
+        {% endfor %}
         <a href="{% url 'create' %}" class="btn btn-success">Add Gear</a>
     </div>
 {% endblock %}

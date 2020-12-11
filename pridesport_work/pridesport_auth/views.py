@@ -137,4 +137,4 @@ def logout_user(request):
     return redirect('landing page')
 
 def user_profile(request, pk=None):
-    pass
+    return render(request, 'auth/user_profile.html')
