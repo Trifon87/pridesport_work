@@ -28,8 +28,9 @@
         <ul class="navbar-nav">
             <a class="nav-link" href="/">Home</a>
             <a class="nav-link" href="{% url 'gears' %}">All gears</a>
+            {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'create' %}">Add gears</a>
-
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'register user' %}">Register</a>
             </li>
@@ -64,7 +65,6 @@
             <p> E-mail: office@pridesport.bg</p>
             <a class='btn btn-primary' href="{% url 'about' %}"> About us </a>
         </div>
-
     </div>
 {% endblock %}
 

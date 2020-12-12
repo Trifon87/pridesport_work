@@ -21,6 +21,7 @@ def extract_filter_values(params):
         'price': price,
     }
 
+
 def gear_list(request):
     params = extract_filter_values(request.GET)
     order_by = 'price' if params['order'] == FilterForm.ORDER_ASC else '-price'
@@ -37,7 +38,6 @@ def gear_list(request):
 
 
 def gear_details(request, pk):
-
     gear = Gear.objects.get(pk=pk)
     gear.can_delete = gear.created_by_id == request.user.id
     gear.can_edit = gear.created_by_id == request.user.id
@@ -53,7 +53,6 @@ def gear_details(request, pk):
     else:
         form = CommentForm(request.POST)
         if form.is_valid():
-
             comment = Comment(text=form.cleaned_data['text'])
             comment.gear = gear
             comment.save()
@@ -66,7 +65,6 @@ def gear_details(request, pk):
         return render(request, 'gear_detail.html', context)
 
 
-
 @login_required
 def gear_like(request, pk):
     gear = Gear.objects.get(pk=pk)
@@ -74,6 +72,7 @@ def gear_like(request, pk):
     like.gear = gear
     like.save()
     return redirect('gear detail', pk)
+
 
 @group_required(['Staff'])
 def edit(request, pk):
@@ -92,12 +91,12 @@ def edit(request, pk):
             gear = form.save()
             return redirect('gear detail', gear.pk)
         context = {
-            'form' : form,
+            'form': form,
             'gear': gear,
         }
         return render(request, 'gear_edit.html', context)
 
-@group_required(['Staff'])
+
 def delete(request, pk):
     gear = Gear.objects.get(pk=pk)
     if request.method == "GET":
@@ -110,35 +109,13 @@ def delete(request, pk):
         return redirect('gears')
 
 
-@group_required(['Staff'])
-def create(request):
-
-    if request.method == "GET":
-        form = GearForm()
-        context = {
-            'form': form,
-        }
-        return render(request, 'gear_create.html', context)
-    else:
-        form = GearForm(request.POST,request.FILES)
-        if form.is_valid():
-
-            gear = form.save()
-            return redirect('gear detail', gear.pk)
-        context = {
-            'form': form,
-        }
-        return render(request, 'gear_list.html', context)
-
-
 class CreateGearView(views.CreateView):
     template_name = 'gear_create.html'
     model = Gear
     form_class = GearForm
 
     def get_success_url(self):
-        return reverse_lazy('gear detail', kwargs= {'pk':self.object.id})
-
+        return reverse_lazy('gear detail', kwargs={'pk': self.object.id})
 
     def form_valid(self, form):
         gear = form.save(commit=False)
@@ -147,6 +124,6 @@ class CreateGearView(views.CreateView):
         gear.save()
         return super().form_valid(form)
 
+
 def about(request):
     return render(request, 'about_us.html')
-

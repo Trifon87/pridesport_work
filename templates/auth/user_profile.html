@@ -3,7 +3,7 @@
     {% load bootstrap4 %}
     <div class="text-center">
         <h1>Fighter: {{ user.username }}</h1>
-        <h5>This is your profile</h5>
+
         <img class="rounded-circle mb-3" src="{{ user.userprofile.profile_image.url }}"
              width="140"
              height="140">
@@ -23,7 +23,7 @@
 
     <div class="text-center">
     {% for gear in user.gears %}
-        {{ gear }}
+
         {% endfor %}
         <a href="{% url 'create' %}" class="btn btn-success">Add Gear</a>
     </div>

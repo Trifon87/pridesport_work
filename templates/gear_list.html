@@ -16,7 +16,7 @@
 
                             <h5 class="card-title">{{ gear.type }} {{ gear.name }}, Цена: {{ gear.price }}0лв</h5>
                             <p class="card-text">{{ gear.description }}</p>
-                            <a class='btn btn-primary' href="{% url 'gear detail' gear.id %}"> Click </a>
+                            <a class='btn btn-primary' href="{% url 'gear detail' gear.id %}"> See More </a>
                         {% if gear.can_delete or user.is_superuser %}
                             <a href='{% url 'edit' gear.pk %}' class="btn btn-success">Edit</a>
                             <a href='{% url 'delete' gear.id %}' class="btn btn-danger">Delete</a>
