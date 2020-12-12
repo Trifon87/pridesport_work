@@ -33,7 +33,7 @@ def gear_list(request):
         'gears': gears,
         'filter_form': FilterForm(initial=params),
     }
-    return render(request, 'gear_list_try.html', context)
+    return render(request, 'gear_list.html', context)
 
 
 def gear_details(request, pk):
@@ -48,7 +48,7 @@ def gear_details(request, pk):
             'form': CommentForm(),
         }
 
-        return render(request, 'gear_detail_try.html', context)
+        return render(request, 'gear_detail.html', context)
 
     else:
         form = CommentForm(request.POST)
@@ -63,7 +63,7 @@ def gear_details(request, pk):
             'form': form,
         }
 
-        return render(request, 'gear_detail_try.html', context)
+        return render(request, 'gear_detail.html', context)
 
 
 
@@ -128,7 +128,7 @@ def create(request):
         context = {
             'form': form,
         }
-        return render(request, 'gear_list_try.html', context)
+        return render(request, 'gear_list.html', context)
 
 
 def about(request):

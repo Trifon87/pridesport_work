@@ -2,12 +2,14 @@
 {% block site_content %}
     {% load bootstrap4 %}
     <div class="text-center">
-        <h1>Hello, {{ user.username }}!</h1>
+        <h1>Fighter: {{ user.username }}</h1>
         <h5>This is your profile</h5>
         <img class="rounded-circle mb-3" src="{{ user.userprofile.profile_image.url }}"
              width="140"
              height="140">
-
+        <h5>Born : {{ user.userprofile.date_of_birth }}</h5>
+        <h5>Email : {{ user.userprofile.user.email }}</h5>
+        <h5>With us since: {{ user.userprofile.user.date_joined }}</h5>
         <div class="w-50 m-auto">
             {% csrf_token %}
 
