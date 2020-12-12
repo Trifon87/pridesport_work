@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db import transaction
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
-
+from django.views import generic as views
 from pridesport_work.pridesport_auth.forms.forms import RegisterForm, ProfileForm, LoginForm
 
 
@@ -67,6 +69,8 @@ from pridesport_work.pridesport_auth.forms.forms import RegisterForm, ProfileFor
 # def logout_user(request):
 #     logout(request)
 #     return redirect('landing page')
+from pridesport_work.pridesport_auth.models import UserProfile
+
 
 class RegisterView(TemplateView):
     template_name = 'auth/register.html'
@@ -136,5 +140,21 @@ def logout_user(request):
     logout(request)
     return redirect('landing page')
 
-def user_profile(request, pk=None):
-    return render(request, 'auth/user_profile.html')
+
+class UserProfileView(views.UpdateView):
+    template_name = 'auth/user_profile.html'
+    form_class = ProfileForm
+    model = UserProfile
+    success_url = reverse_lazy('user profile')
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk', None)
+        user = self.request.user if pk is None else User.objects.get(pk=pk)
+        return user.userprofile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['user_profile'] = self.get_object().user
+
+        return context
+

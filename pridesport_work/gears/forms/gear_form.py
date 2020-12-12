@@ -13,7 +13,7 @@ class GearForm(forms.ModelForm):
 
     class Meta:
         model = Gear
-        fields = "__all__"
+        exclude = ("created_by", )
 
 class FilterForm(forms.Form):
     ORDER_ASC = 'asc'

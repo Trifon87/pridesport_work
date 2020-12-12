@@ -1,14 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-
+from django.urls import reverse_lazy
+from django.views import generic as views
 from pridesport_work.core.clean_up import clean_up_files
 from pridesport_work.decorators.decorators import group_required
 from pridesport_work.gears.forms.comment_form import CommentForm
 from pridesport_work.gears.forms.gear_form import GearForm, FilterForm
 from pridesport_work.gears.models import Gear, Like, Comment
 
-
-# Create your views here.
 
 def extract_filter_values(params):
     order = params['order'] if 'order' in params else FilterForm.ORDER_ASC
@@ -129,6 +128,12 @@ def create(request):
             'form': form,
         }
         return render(request, 'gear_list.html', context)
+
+
+class CreateGearView(views.CreateView):
+    template_name = 'gear_create.html'
+    form_class = GearForm
+    success_url = reverse_lazy('user profile')
 
 
 def about(request):

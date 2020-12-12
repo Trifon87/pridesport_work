@@ -1,7 +1,7 @@
 from django.urls import path
 
-from pridesport_work.sportgoods.views import landing_page
+from pridesport_work.sportgoods.views import LandingPage
 
 urlpatterns = [
-    path('', landing_page, name='landing page')
+    path('', LandingPage.as_view(), name='landing page')
 ]
