@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
+
 from pridesport_work.core.clean_up import clean_up_files
 from pridesport_work.decorators.decorators import group_required
 from pridesport_work.gears.forms.comment_form import CommentForm
@@ -132,9 +133,19 @@ def create(request):
 
 class CreateGearView(views.CreateView):
     template_name = 'gear_create.html'
+    model = Gear
     form_class = GearForm
-    success_url = reverse_lazy('user profile')
 
+    def get_success_url(self):
+        return reverse_lazy('gear detail', kwargs= {'pk':self.object.id})
+
+
+    def form_valid(self, form):
+        gear = form.save(commit=False)
+        gear.user = self.request.user.userprofile
+        gear.created_by = self.request.user
+        gear.save()
+        return super().form_valid(form)
 
 def about(request):
     return render(request, 'about_us.html')

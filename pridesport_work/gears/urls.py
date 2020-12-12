@@ -1,6 +1,6 @@
 from django.urls import path
 
-from pridesport_work.gears.views import gear_list, gear_details, gear_like, edit, delete, create, about
+from pridesport_work.gears.views import gear_list, gear_details, gear_like, edit, delete, create, about, CreateGearView
 
 urlpatterns = [
     path('', gear_list, name='gears'),
@@ -8,6 +8,7 @@ urlpatterns = [
     path('like/<int:pk>/', gear_like, name='like gear'),
     path('edit/<int:pk>/', edit, name='edit'),
     path('delete/<int:pk>/', delete, name='delete'),
-    path('create/', create, name='create'),
+    # path('create/', create, name='create'),
+    path('create/', CreateGearView.as_view(), name='create'),
     path('about/', about, name='about'),
 ]

@@ -14,7 +14,13 @@
             {% endfor %}
             {% buttons %}
                 <button class="btn btn-primary">Submit</button>
-                <p>or <a href="{% url 'login user' %}">login</a></p>
+
+                <h5 style="margin-top: 40px">
+                    <a href='{% url 'login user' %}' class="btn btn-success">Login</a>
+                    If Already Registered
+                </h5>
+
+
             {% endbuttons %}
         </form>
     </div>

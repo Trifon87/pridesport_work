@@ -11,7 +11,13 @@
             {% endfor %}
             {% buttons %}
                 <button class="btn btn-primary">Login</button>
-                <p>or <a href="{% url 'register user' %}?next={{ request.GET.next }}">register</a></p>
+
+
+                <h5 style="margin-top: 40px">
+                If you don't have account
+                    <a href='{% url 'register user' %}' class="btn btn-success">Register</a>
+
+                </h5>
             {% endbuttons %}
         </form>
     </div>

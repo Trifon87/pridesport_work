@@ -1314,6 +1314,7 @@ UC/10
     </table>
     <table id="84" parent="44" name="gears_gear">
       <ObjectId>42721</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>1260</StateNumber>
     </table>
