@@ -119,7 +119,7 @@ class CreateGearView(views.CreateView):
 
     def form_valid(self, form):
         gear = form.save(commit=False)
-        gear.user = self.request.user.userprofile
+        gear.user = self.request.user
         gear.created_by = self.request.user
         gear.save()
         return super().form_valid(form)
